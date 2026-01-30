@@ -1,0 +1,49 @@
+from abc import ABC, abstractmethod
+
+class BankAccount(ABC):
+    def __init__(self, acc_no, holder, balance=0):
+        self.acc_no = acc_no
+        self.holder = holder
+        self.__balance = balance   # Encapsulation
+
+    def deposit(self, amount):
+        self.__balance += amount
+
+    def withdraw(self, amount):
+        if amount <= self.__balance:
+            self.__balance -= amount
+
+    def get_balance(self):
+        return self.__balance
+
+    @abstractmethod
+    def calculate_interest(self):
+        pass
+
+
+class SavingsAccount(BankAccount):
+    def calculate_interest(self):
+        return self.get_balance() * 0.05
+
+
+class CurrentAccount(BankAccount):
+    def calculate_interest(self):
+        return 0
+
+class FixedDepositAccount(BankAccount):
+     def __init__(self,months):
+         self.months = months
+
+     def calculate_interest(self,maturity_time):
+        if self.months < maturity_time:
+             return "You can't cancel fixed rightnow "
+       else:
+          return self.get_balance() * 0.07
+
+
+acc1 = SavingsAccount("101", "Koti", 10000)
+print("Interest:", acc1.calculate_interest())
+
+F = FixedDepositAccount(int(input('Enter how many months passed')))
+print(F.calculate_interest(24))
+print(F.calculate_interest(8))
