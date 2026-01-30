@@ -1,0 +1,22 @@
+ Abstract Class:
+BankAccount
+
+account_number
+
+account_holder
+
+balance (private)
+
+deposit(amount)
+
+withdraw(amount)
+
+calculate_interest() → abstract
+
+Child Classes (Polymorphism):
+
+SavingsAccount → higher interest, withdrawal limit
+
+CurrentAccount → no interest, overdraft allowed
+
+FixedDepositAccount → no withdrawal before maturity
